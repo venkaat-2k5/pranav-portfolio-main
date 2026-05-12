@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pranav Ramanatha Siva — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f4f1eb;
+    --accent: #c8392b;
+    --gold: #d4a843;
+    --muted: #7a7570;
+    --card: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(244,241,235,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(10,10,15,0.08);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 6rem;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7vw, 7rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-tagline {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--card);
+    background: var(--ink);
+    padding: 1rem 2rem;
+    transition: background 0.2s, transform 0.2s;
+    width: fit-content;
+  }
+  .hero-cta:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-img-wrap {
+    width: 100%; height: 100%;
+    position: relative;
+  }
+  .hero-img-wrap::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(200,57,43,0.15) 0%, transparent 60%);
+    z-index: 1;
+  }
+  .hero-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(20%);
+  }
+  .hero-badge {
+    position: absolute; bottom: 3rem; left: -2rem; z-index: 2;
+    background: var(--accent);
+    color: white;
+    padding: 1.2rem 1.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 6rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--ink); color: var(--paper); }
+  #about .section-label { color: var(--gold); }
+  #about .section-title { color: var(--paper); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-bio { font-size: 1.05rem; line-height: 1.8; color: rgba(244,241,235,0.75); }
+  .about-bio p + p { margin-top: 1.2rem; }
+  .about-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+  .stat-item { border-top: 1px solid rgba(244,241,235,0.15); padding-top: 1.2rem; }
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(244,241,235,0.45);
+    margin-top: 0.3rem;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--paper); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid rgba(10,10,15,0.08);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .skill-card::after {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .skill-card:hover::after { transform: scaleY(1); }
+  .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .skill-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .skill-desc { font-size: 0.85rem; line-height: 1.6; color: var(--muted); }
+
+  /* EXPERIENCE */
+  #experience { background: #f0ede6; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: rgba(10,10,15,0.12);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 3.5rem 3rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -0.45rem; top: 0.4rem;
+    width: 0.9rem; height: 0.9rem;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .timeline-role {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.2rem;
+  }
+  .timeline-org {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .timeline-bullets { list-style: none; }
+  .timeline-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #3a3835;
+    padding-left: 1.2rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* ASSIGNMENTS */
+  #assignments { background: var(--ink); color: var(--paper); }
+  #assignments .section-title { color: var(--paper); }
+  .assignments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .assignment-card {
+    border: 1px solid rgba(244,241,235,0.12);
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .assignment-card:hover {
+    border-color: var(--gold);
+    background: rgba(244,241,235,0.03);
+  }
+  .assignment-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: rgba(244,241,235,0.06);
+    position: absolute; top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+  .assignment-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+  .assignment-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    color: var(--paper);
+    margin-bottom: 0.8rem;
+  }
+  .assignment-desc { font-size: 0.88rem; line-height: 1.65; color: rgba(244,241,235,0.55); margin-bottom: 1rem; }
+  .assignment-reflection {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgba(244,241,235,0.4);
+    border-top: 1px solid rgba(244,241,235,0.08);
+    padding-top: 1rem;
+    font-style: italic;
+  }
+
+  /* CERTS */
+  #certs { background: var(--paper); }
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .cert-pill {
+    background: var(--card);
+    border: 1px solid rgba(10,10,15,0.08);
+    padding: 1.2rem 1.4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.5;
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
+  }
+  .cert-pill:hover { background: var(--accent); color: white; }
+  .cert-year { display: block; color: var(--muted); font-size: 0.65rem; margin-top: 0.3rem; }
+  .cert-pill:hover .cert-year { color: rgba(255,255,255,0.7); }
+
+  /* CONTACT */
+  #contact {
+    background: var(--accent);
+    color: white;
+    text-align: center;
+    padding: 6rem;
+  }
+  #contact .section-label { color: rgba(255,255,255,0.6); }
+  #contact .section-title { color: white; font-size: clamp(3rem, 6vw, 5rem); }
+  .contact-links {
+    display: flex; justify-content: center; gap: 2rem;
+    margin-top: 2.5rem; flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    padding: 0.9rem 1.8rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: background 0.2s, color 0.2s;
+  }
+  .contact-link:hover { background: white; color: var(--accent); }
+
+  footer {
+    background: var(--ink);
+    color: rgba(244,241,235,0.3);
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 6rem 2rem 3rem; }
+    .hero-right { height: 60vw; }
+    section { padding: 4rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .assignments-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PRS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#assignments">Assignments</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Intro to IST — Digital Portfolio</p>
+    <h1 class="hero-name">Pranav<br><span>Ramanatha</span><br>Siva</h1>
+    <p class="hero-tagline">Cybersecurity Analytics & Operations student at Penn State. Former national cricketer. Passionate about securing digital systems and building meaningful tech.</p>
+    <a href="#about" class="hero-cta">View Portfolio ↓</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <img src="a_clean_studio_style_portrait_id_head_and_shoulder.png" alt="Pranav Ramanatha Siva">
+      <div class="hero-badge">
+        Penn State<br>Cybersecurity<br>2027
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="fade-up">
+    <p class="section-label">Introduction</p>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-bio">
+        <p>I'm Pranav Ramanatha Siva — a Cybersecurity Analytics and Operations student at Pennsylvania State University, originally from Singapore. My academic journey is fueled by a deep passion for understanding how digital systems work, and more importantly, how to keep them secure.</p>
+        <p>Beyond the classroom, I bring a rare combination of technical rigor and real-world leadership. As a former national cricketer who represented Singapore in the ICC World Cup Qualifiers, I've learned to perform under pressure, think strategically, and lead teams toward a common goal — skills that transfer seamlessly into the cybersecurity world.</p>
+        <p>I've completed internships in cyber security, worked as an IT Service Specialist at Penn State, and hold certifications in Linux, Pentesting, Networking, and more. I'm passionate about applying cybersecurity best practices to protect real systems, and I'm always looking to grow, connect, and contribute.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">Languages Spoken</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">11</div>
+          <div class="stat-label">Certifications Earned</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Countries Lived In</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2027</div>
+          <div class="stat-label">Expected Graduation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Capabilities</p>
+  <h2 class="section-title">Skills Acquired</h2>
+  <div class="skills-grid fade-up">
+    <div class="skill-card">
+      <div class="skill-icon">🔐</div>
+      <div class="skill-name">Cybersecurity</div>
+      <div class="skill-desc">Vulnerability assessments, threat analysis, security monitoring, incident response, and application of cybersecurity best practices in real-world scenarios.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <div class="skill-name">IT Support</div>
+      <div class="skill-desc">Technical support, Windows 10/11 & macOS administration, ServiceNow incident management, and IT process optimization.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Networking</div>
+      <div class="skill-desc">Fundamentals of networking, Nmap scanning, Linux command-line operations, and Pentesting basics for ethical security testing.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Microsoft 365</div>
+      <div class="skill-desc">Proficient in Microsoft Office Suite, Teams, OneDrive, and SharePoint for collaborative, cloud-based productivity and project management.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">👥</div>
+      <div class="skill-name">Leadership</div>
+      <div class="skill-desc">Team leadership, event coordination, VP-level club management, and strategic communication honed through athletics and organizational roles.</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗣️</div>
+      <div class="skill-name">Communication</div>
+      <div class="skill-desc">Multilingual communication in English, Hindi, Tamil, and Spanish. Public outreach, publicity campaigns, and cross-functional team collaboration.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Work History</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline fade-up">
+
+    <div class="timeline-item">
+      <div class="timeline-date">Feb 2024 — Present</div>
+      <div class="timeline-role">IT Service Specialist</div>
+      <div class="timeline-org">Pennsylvania State University · State College, PA</div>
+      <ul class="timeline-bullets">
+        <li>Provide comprehensive computer assistance and technical support across campus</li>
+        <li>Maintain a database of customer information to enable faster, more efficient service</li>
+        <li>Use ServiceNow for incident management, tracking, and resolving IT service requests</li>
+        <li>Implement best practices to streamline IT processes and improve efficiency</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">May 2024 — Oct 2024</div>
+      <div class="timeline-role">Cybersecurity Intern</div>
+      <div class="timeline-org">Reward360 · Remote</div>
+      <ul class="timeline-bullets">
+        <li>Monitored security alerts to help protect information systems and data</li>
+        <li>Conducted vulnerability assessments to identify potential security risks</li>
+        <li>Supported incident response efforts under senior professional guidance</li>
+        <li>Developed skills in threat analysis and applied cybersecurity best practices</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Dec 2023 — May 2025</div>
+      <div class="timeline-role">Vice President</div>
+      <div class="timeline-org">Lions United Cricket Association · Middletown, PA</div>
+      <ul class="timeline-bullets">
+        <li>Foster team cohesion and leadership development through organized initiatives</li>
+        <li>Manage logistics, coordinate events, and oversee day-to-day operations</li>
+        <li>Promote cricket within the local community through outreach and engagement</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jan 2022 — Mar 2023</div>
+      <div class="timeline-role">National Cricketer</div>
+      <div class="timeline-org">Singapore Cricket Association · Singapore</div>
+      <ul class="timeline-bullets">
+        <li>Represented Singapore in ICC World Cup Qualifiers and bilateral series</li>
+        <li>Developed discipline, strategic thinking, and high-pressure performance skills</li>
+        <li>Strengthened leadership and adaptability in elite competitive environments</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Dec 2021 — Dec 2022</div>
+      <div class="timeline-role">Director of Publicity</div>
+      <div class="timeline-org">GIISMUN Singapore · Singapore</div>
+      <ul class="timeline-bullets">
+        <li>Led comprehensive publicity campaigns and developed strategic communications</li>
+        <li>Built and maintained strong media relationships</li>
+        <li>Contributed to the successful promotion and execution of major events</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ASSIGNMENTS -->
+<section id="assignments">
+  <p class="section-label">Coursework</p>
+  <h2 class="section-title">Assignments & Projects</h2>
+  <div class="assignments-grid fade-up">
+
+    <div class="assignment-card">
+      <div class="assignment-num">01</div>
+      <div class="assignment-tag">IST Foundations</div>
+      <div class="assignment-title">Introduction to Information Systems</div>
+      <div class="assignment-desc">Explored the fundamental concepts of information science and technology, including data management, system components, and the role of IT in organizations.</div>
+      <div class="assignment-reflection">Reflection: This assignment grounded my understanding of how information flows through organizations. It connected my hands-on IT support experience at Penn State to formal theory, helping me see the bigger picture of why systems need to be both efficient and secure.</div>
+    </div>
+
+    <div class="assignment-card">
+      <div class="assignment-num">02</div>
+      <div class="assignment-tag">Digital Literacy</div>
+      <div class="assignment-title">Digital Tools & Productivity</div>
+      <div class="assignment-desc">Applied Microsoft 365 tools — including Teams, OneDrive, and SharePoint — to collaborative projects, mirroring real-world enterprise workflows.</div>
+      <div class="assignment-reflection">Reflection: Having used these tools professionally at Penn State's IT desk, this project deepened my appreciation for structured digital workflows. I learned how tool selection directly impacts team productivity and information security.</div>
+    </div>
+
+    <div class="assignment-card">
+      <div class="assignment-num">03</div>
+      <div class="assignment-tag">Cybersecurity</div>
+      <div class="assignment-title">Security Concepts & Threat Analysis</div>
+      <div class="assignment-desc">Analyzed common cybersecurity threats, explored vulnerability assessment methodologies, and developed an incident response framework for a simulated scenario.</div>
+      <div class="assignment-reflection">Reflection: This project directly paralleled my internship at Reward360. Moving from practical experience to academic framework reinforced that effective security requires both technical knowledge and structured thinking. I now approach threats more systematically.</div>
+    </div>
+
+    <div class="assignment-card">
+      <div class="assignment-num">04</div>
+      <div class="assignment-tag">Networking</div>
+      <div class="assignment-title">Network Fundamentals & Infrastructure</div>
+      <div class="assignment-desc">Studied network topologies, protocols, and infrastructure components. Applied concepts through hands-on analysis of network traffic and device configurations.</div>
+      <div class="assignment-reflection">Reflection: My Networking and Nmap certifications gave me a head start, but this assignment pushed me further into understanding why network design choices matter for security. It bridged my certification knowledge with academic rigor.</div>
+    </div>
+
+    <div class="assignment-card">
+      <div class="assignment-num">05</div>
+      <div class="assignment-tag">Data & Systems</div>
+      <div class="assignment-title">Database Design & Management</div>
+      <div class="assignment-desc">Designed and implemented a relational database structure, applying normalization principles and query optimization for efficient data retrieval.</div>
+      <div class="assignment-reflection">Reflection: At Penn State's IT desk, I maintain a customer database using ServiceNow. This assignment gave me the theoretical foundation behind what I do daily — reinforcing that good database design is inseparable from good data security practice.</div>
+    </div>
+
+    <div class="assignment-card">
+      <div class="assignment-num">06</div>
+      <div class="assignment-tag">Digital Portfolio</div>
+      <div class="assignment-title">Final Portfolio — This Site</div>
+      <div class="assignment-desc">Designed and developed this digital portfolio from scratch, synthesizing all course learnings into a cohesive, professional web presence that showcases skills, experience, and growth.</div>
+      <div class="assignment-reflection">Reflection: Building this portfolio was a capstone moment. It challenged me to think not just as a technologist, but as a communicator — translating complex skills and experiences into a clear, compelling narrative. This is the document I'll share with the world.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+  <div class="certs-grid fade-up">
+    <div class="cert-pill">Linux Fundamentals<span class="cert-year">May – Aug 2024</span></div>
+    <div class="cert-pill">Pentesting Fundamentals<span class="cert-year">Jun – Aug 2024</span></div>
+    <div class="cert-pill">Networking<span class="cert-year">May – Sep 2024</span></div>
+    <div class="cert-pill">Nmap Fundamentals<span class="cert-year">May – Jun 2024</span></div>
+    <div class="cert-pill">OneDrive for Business<span class="cert-year">Feb – Mar 2024</span></div>
+    <div class="cert-pill">Learning ITIL<span class="cert-year">Feb – Mar 2024</span></div>
+    <div class="cert-pill">Windows 11 Support<span class="cert-year">Apr 2024</span></div>
+    <div class="cert-pill">Leadership Through Learning<span class="cert-year">Apr 2024</span></div>
+    <div class="cert-pill">Phone Customer Service<span class="cert-year">Apr 2024</span></div>
+    <div class="cert-pill">Learning ServiceNow<span class="cert-year">Apr 2024</span></div>
+    <div class="cert-pill">IT Enterprise Help Desk<span class="cert-year">Apr 2024</span></div>
+    <div class="cert-pill">NSA Certificate<span class="cert-year">In Progress · 2027</span></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Let's Connect</h2>
+  <p style="font-size:1rem; color:rgba(255,255,255,0.75); margin-top:1rem;">Open to internships, collaborations, and conversations about cybersecurity.</p>
+  <div class="contact-links">
+    <a href="mailto:rpranavvenkat29@gmail.com" class="contact-link">✉ rpranavvenkat29@gmail.com</a>
+    <a href="tel:+17177759709" class="contact-link">📞 +1 717 775 9709</a>
+    <a href="#" class="contact-link">📍 State College, PA</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Pranav Ramanatha Siva · IST Portfolio · Pennsylvania State University
+</footer>
+
+<script>
+  // Intersection observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
